@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -9,27 +8,27 @@ public class PlayerController : MonoBehaviour
     //Jump force
     private float jumpForce = 15.0f;
     //Gravity Modifier
-    public float gravityModifier;
+    [SerializedField] private float gravityModifier;
     //Are we on the ground?
     private bool isOnGround = true;
     //Is the Game Over
-    public bool gameOver = false;
+    [SerializedField] private bool gameOver {get; private set;};
 
     //Player Animator
     private Animator playerAnim;
 
     //ParticleSystem explosion
-    public ParticleSystem explositionParticle;
+    [SerializedField] private ParticleSystem explositionParticle;
     //ParticleSystem dirt
-    public ParticleSystem dirtParticle;
+    [SerializedField] private ParticleSystem dirtParticle;
 
     //Jump sound
-    public AudioClip jumpSound;
+    [SerializedField] private AudioClip jumpSound;
     //Crash sound
-    public AudioClip crashSound;
+    [SerializedField] private AudioClip crashSound;
     //Player Audio
-    public AudioSource playerAudio;
-
+    [SerializedField] private AudioSource playerAudio;
+private const string gameOver = "Gameover"
     // Start is called before the first frame update
     void Start()
     {
@@ -61,12 +60,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        private const string GROUND_TAG = "Ground"
+        if (collision.gameObject.CompareTag(GROUND_TAG"));
         {
             dirtParticle.Play();
             isOnGround = true;
         }
-        else if (collision.gameObject.CompareTag("Obstacle"))
+        private const string OBSTACLE_TAG = " Obstacle"
+        else if (collision.gameObject.CompareTag(OBSTACLE));
         {
             explositionParticle.Play();
             dirtParticle.Stop();
